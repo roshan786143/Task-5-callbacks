@@ -26,11 +26,12 @@ getPost(posts);
 function createPost(post,callback){
 setTimeout(()=>{
 // post.createdAt = posting;
-let seconds = new Date().getTime();
-let hours = new Date().getHours();
-let minutes = new Date().getMinutes();
+seconds = new Date().getTime();
+hours = new Date().getHours();
+minutes = new Date().getMinutes();
 posts.push({...post,createdAtHours : hours,createdAtMinutes : minutes,createdAtSecs : seconds});
-console.log(post.createdAt);
+// console.log(post.createdAt);
+console.log(callback+"----------------------------");
 callback();
 
 },3000)
@@ -38,15 +39,29 @@ callback();
 
 function create4thPost(post,callback){
     setTimeout(()=>{
-        let seconds = new Date().getTime();
-        let hours = new Date().getHours();
-        let minutes = new Date().getMinutes();
+        seconds = new Date().getTime();
+        hours = new Date().getHours();
+        minutes = new Date().getMinutes();
         posts.push({...post,createdAtHours:hours,createdAtMinutes : minutes,createdAtSecs:seconds});
-        getPost();
-        lastEditedInSecondsAgo();
+        callback();
+        // console.log(callback+"-------------------------------");
+        // lastEditedInSecondsAgo();
 
     },5000)
 
+}
+
+function create5thPost(post,callback){
+    setTimeout(()=>{
+        seconds = new Date().getTime();
+        hours = new Date().getHours();
+        minutes = new Date().getMinutes();
+        posts.push({...post,createdAtHours:hours,createdAtMinutes : minutes,createdAtSecs:seconds});
+        callback();
+        // console.log(callback);
+        lastEditedInSecondsAgo();
+
+    },10000)
 }
 
 function lastEditedInSecondsAgo(){
@@ -54,4 +69,7 @@ function lastEditedInSecondsAgo(){
 }
 
 createPost({title : "post three", body : "My third post"},getPost);
-create4thPost({title : "post four", body : "My fourth post"},createPost);
+create4thPost({title : "post four", body : "My fourth post"},getPost);
+create5thPost({title:"post five",body : "My fifth post"},getPost);
+console.log(posts);
+console.log("*********************************************************************************************");
